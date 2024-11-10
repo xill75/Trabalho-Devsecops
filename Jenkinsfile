@@ -3,8 +3,6 @@ pipeline {
 
     environment {
         DOCKER_REPO = 'felpsxill/malware-app'
-        FRONTEND_DIR = 'Frontend'
-        BACKEND_DIR = 'Backend'
         FRONTBACK_DIR = 'FrontBack'
         MYSQL_DIR = 'Mysql'
         K8S_DIR = 'k8s'
@@ -14,7 +12,7 @@ pipeline {
         stage('Initialize Pipeline') {
             steps {
                 script {
-                    csm checkout
+                    checkout scm
                 }
             }
         }
@@ -59,10 +57,8 @@ pipeline {
                         sh "microk8s kubectl apply -f ${K8S_DIR}/mysql-pv.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-mdb.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-front-back.yaml"
-                        sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-be.yaml"
-                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-be.yaml"
-                        sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-fe.yaml"
-                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-fe.yaml"
+                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-front-back.yaml.yaml"
+                       
                     }
                 }
             }
