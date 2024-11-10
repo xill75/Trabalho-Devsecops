@@ -4,7 +4,7 @@ FROM node:22.11.0 AS backend
 WORKDIR /app
 
 # Copiar os arquivos do backend
-COPY ./backend/ /app
+COPY ./Backend/ /app
 
 # Instalar dependências do backend
 RUN npm install
@@ -18,7 +18,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copiar os arquivos de build do frontend para o Nginx
-COPY ./frontend/build /usr/share/nginx/html
+COPY ./Frontend/build /usr/share/nginx/html
 
 # Etapa 3: Combinar Backend e Frontend em um único container com supervisord
 FROM node:22.11.0 AS final
@@ -27,8 +27,8 @@ FROM node:22.11.0 AS final
 RUN apt-get update && apt-get install -y supervisor && rm -rf /var/lib/apt/lists/*
 
 # Copiar os arquivos do Backend e Frontend
-COPY --from=backend /app /app
-COPY --from=frontend /usr/share/nginx/html /usr/share/nginx/html
+COPY --from=Backend /app /app
+COPY --from=Frontend /usr/share/nginx/html /usr/share/nginx/html
 
 # Copiar o arquivo de configuração do supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
