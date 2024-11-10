@@ -4,7 +4,7 @@ FROM node:22.11.0 AS backend
 WORKDIR /app
 
 # Copiar os arquivos do backend
-COPY ./backend /app
+COPY ./backend/ /app
 
 # Instalar dependências do backend
 RUN npm install
