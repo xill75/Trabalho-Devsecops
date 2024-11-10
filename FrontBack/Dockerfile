@@ -38,3 +38,4 @@ EXPOSE 3000 80
 
 # Executa o supervisord para iniciar ambos os serviços
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
