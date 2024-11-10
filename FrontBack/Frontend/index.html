@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malware Registry</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f4f4f4;">
+        <button id="toggleDarkMode" style="margin-right: auto;">Modo Escuro</button>
+        <h1 style="margin: 0; flex-grow: 1; text-align: center;">GeremiasMalwares</h1>
+        <div style="display: flex; gap: 10px;">
+            <button type="button" onclick="logout()">Logout</button>
+            <button type="button" onclick="paginacontato()">Sobre Nós</button>
+        </div>
+    </header>
+    
+    <main>
+        <h2>Cadastro de Malwares</h2>
+        <form id="malwareForm">
+            <input type="text" id="name" placeholder="Nome do Malware" required>
+            <textarea id="description" placeholder="Descrição do Malware"></textarea>
+            <button type="submit">Cadastrar Malware</button>
+        </form>
+        <button id="dowloadcsv">Dowload CSV</button>
+
+        <h2>Lista de Malwares (<span id="malwareCount">0</span>)</h2>
+        <label for="searchMalware">Pesquisar Malware:</label>
+        <input type="text" id="searchMalware" placeholder="Digite o nome do malware">
+        <label for="sortMalwares">Ordenar por:</label>
+        <select id="sortMalwares">
+            <option value="name">Nome (A-Z)</option>
+            <option value="date">Data de Cadastro (Mais Recentes)</option>
+        </select>
+
+        <ul id="malwareList"></ul>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 20px; padding: 10px; background-color: #f4f4f4;">
+        <p>Contato: geremiasmalwares@gmail.com | Telefone: (99) 99999-9999</p>
+    </footer>
+</body>
+</html>

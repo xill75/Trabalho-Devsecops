@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<title>Registro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" href="../css/cadastro.css">
+	<!--===============================================================================================-->
+	<script src="../js/users.js"></script>
+	<!--===============================================================================================-->
+
+</head>
+
+<body>	
+	<form id="form-registro">
+		<div class="container">
+			<div class="main-registro">
+				<div class="card-registro">
+					<h1>Criar conta</h1>
+					<div class="textfield">
+						<label for="usuario">Email</label>
+						<input type="text" name="email" id="email" placeholder="Digite seu email">
+					</div>
+					<div class="textfield">
+						<label for="Senha">Senha</label>
+						<input type="password" name="senha" id="senha" placeholder="Digite sua Senha">
+					</div>
+					<div class="textfield">
+						<label for="Confirmar Senha">Confirmar Senha</label>
+						<input type="password" name="oksenha" id="oksenha" placeholder="Confirme sua senha">
+					</div>
+					<div class="textfield2">
+						<button type="button" class="button-registro mgtop26" id="button-registro" onclick>Registrar-se</button> <br>
+						<a href="login.html" class="mgtop26 buttonconta">Ja tem uma conta?</a>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="senhaHash" id="senhaHash">
+	</form>
+</body>
+
+</html>

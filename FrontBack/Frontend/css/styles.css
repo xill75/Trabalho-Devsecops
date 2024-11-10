@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input, textarea, button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+#malwareList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.malware-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #070707;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2 {
+  color: #111010;
+}
+
+body.dark-mode .malware-item {
+  border-color: #555;
+}
