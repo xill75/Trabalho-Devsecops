@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localhost
+spec:
+  replicas: 3  # Número de pods desejados
+  selector:
+    matchLabels:
+      app: localhost
+  template:
+    metadata:
+      labels:
+        app: localhost
+    spec:
+      containers:
+      - name: localhost
+        image: felpsxill/malware-app:localhost-latest  # Nome correto da imagem
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:  # Ajuste de 'secrets' para 'secretRef'
+            name: mysql-secrets  # Nome do secret (corrigido)
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 5
+      imagePullSecrets:
+      - name: regcred  # Configuração de acesso a repositórios privados
