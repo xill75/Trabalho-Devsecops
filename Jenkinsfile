@@ -57,7 +57,7 @@ pipeline {
                         sh "microk8s kubectl apply -f ${K8S_DIR}/mysql-pv.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-mdb.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-front-back.yaml"
-                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-front-back.yaml.yaml"
+                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-front-back.yaml"
                        
                     }
                 }
