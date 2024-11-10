@@ -14,7 +14,7 @@ pipeline {
         stage('Initialize Pipeline') {
             steps {
                 script {
-                    sh 'git clone https://github.com/xill75/malware-app.git'
+                    csm checkout
                 }
             }
         }
@@ -30,29 +30,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Build and Push Frontend') {
-            steps {
-                dir(FRONTEND_DIR) {
-                    script {
-                        sh "docker build --no-cache -t ${DOCKER_REPO}:frontend-latest -f Dockerfile ."
-                        sh "docker push ${DOCKER_REPO}:frontend-latest"
-                    }
-                }
-            }
-        }
-
-        stage('Build and Push Backend') {
-            steps {
-                dir(BACKEND_DIR) {
-                    script {
-                        sh "docker build --no-cache -t ${DOCKER_REPO}:backend-latest -f Dockerfile ."
-                        sh "docker push ${DOCKER_REPO}:backend-latest"
-                    }
-                }
-            }
-        }
-
         stage('Build and Push Frontend and Backend') {
             steps {
                 dir(FRONTBACK_DIR) {
