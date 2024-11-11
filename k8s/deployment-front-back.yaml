@@ -15,6 +15,7 @@ spec:
       containers:
       - name: front-back
         image: felpsxill/malware-app:frontend-backend-latest  # Nome correto da imagem
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000  # Backend na porta 3000
         - containerPort: 80    # Frontend na porta 80
