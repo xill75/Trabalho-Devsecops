@@ -23,8 +23,8 @@ COPY ./Frontend/ /usr/share/nginx/html
 # Etapa 3: Combinar Backend e Frontend em um único container
 FROM nginx:alpine AS Final
 
-# Instalar Node.js (para o backend) e dependências
-RUN apt-get update && apt-get install -y nodejs npm
+# Instalar Node.js e npm usando o apk
+RUN apk update && apk add --no-cache nodejs npm
 
 # Copiar os arquivos do Backend e Frontend
 COPY --from=Backend /app /app
