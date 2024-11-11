@@ -7,6 +7,7 @@ pipeline {
         MYSQL_DIR = 'Mysql'
         K8S_DIR = 'k8s'
     }
+
     stages {
         stage('Initialize Pipeline') {
             steps {
@@ -15,7 +16,7 @@ pipeline {
                 }
             }
         }
-    }
+
         stage('Docker Login') {
             steps {
                 script {
@@ -27,6 +28,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build and Push Frontend and Backend') {
             steps {
                 dir(FRONTBACK_DIR) {
@@ -58,7 +60,6 @@ pipeline {
                         sh "microk8s kubectl apply -f ${K8S_DIR}/service-db.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-front-back.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/service-front-back.yaml"
-                       
                     }
                 }
             }
