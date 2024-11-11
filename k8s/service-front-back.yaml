@@ -8,7 +8,7 @@ spec:
   ports:
     - name: http
       port: 80          # Porta externa (para o frontend)
-      targetPort: 3080   # Porta interna no contêiner para o frontend
+      targetPort: 80   # Porta interna no contêiner para o frontend
       nodePort: 30080    # Porta externa no nó para o frontend
     - name: backend
       port: 3000        # Porta externa (para o backend)
