@@ -56,6 +56,7 @@ pipeline {
                     withCredentials([file(credentialsId: '7e2b1354-0f09-450c-9117-01d55771317b', variable: 'KUBECONFIG')]) {
                         sh "microk8s kubectl apply -f ${K8S_DIR}/mysql-pv.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-mdb.yaml"
+                        sh "microk8s kubectl apply -f ${K8S_DIR}/service-db.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/deployment-front-back.yaml"
                         sh "microk8s kubectl apply -f ${K8S_DIR}/service-front-back.yaml"
                        
