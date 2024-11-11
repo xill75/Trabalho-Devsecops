@@ -7,7 +7,6 @@ pipeline {
         MYSQL_DIR = 'Mysql'
         K8S_DIR = 'k8s'
     }
-
     stages {
         stage('Initialize Pipeline') {
             steps {
@@ -16,7 +15,7 @@ pipeline {
                 }
             }
         }
-
+    }
         stage('Docker Login') {
             steps {
                 script {
