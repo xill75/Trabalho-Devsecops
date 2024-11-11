@@ -30,9 +30,6 @@ RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 COPY --from=Backend /app /app
 COPY --from=Frontend /usr/share/nginx/html /usr/share/nginx/html
 
-# Copiar o arquivo de configuração do Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
 # Expor as portas
 EXPOSE 3000 80
 
