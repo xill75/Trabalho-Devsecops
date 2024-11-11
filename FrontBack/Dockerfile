@@ -1,30 +1,30 @@
 # Etapa 1: Construção do Backend
-FROM node:22.11.0 AS backend
+FROM node:22.11.0 AS Backend
 
 WORKDIR /app
 
 # Copiar os arquivos do backend
-COPY ./Backend/ /app
+COPY ./backend/ /app
 
 # Instalar dependências do backend
 RUN npm install
 
 # Etapa 2: Construção do Frontend (Nginx)
-FROM nginx:alpine AS frontend
+FROM nginx:alpine AS Frontend
 
 WORKDIR /usr/share/nginx/html
 
 # Remover arquivos existentes do Nginx
 RUN rm -rf ./*
 
-# Copiar os arquivos  do frontend para o Nginx
-COPY ./Frontend/ /usr/share/nginx/html
+# Copiar os arquivos de build do frontend para o Nginx
+COPY ./frontend/build /usr/share/nginx/html
 
 # Etapa 3: Combinar Backend e Frontend em um único container com supervisord
-FROM node:22.11.0 AS final
+FROM node:22.11.0 AS Final
 
-# Instala o supervisor
-RUN apt-get update && apt-get install -y supervisor && rm -rf /var/lib/apt/lists/*
+# Instala o supervisor e o Nginx
+RUN apt-get update && apt-get install -y supervisor nginx && rm -rf /var/lib/apt/lists/*
 
 # Copiar os arquivos do Backend e Frontend
 COPY --from=Backend /app /app
@@ -38,4 +38,3 @@ EXPOSE 3000 80
 
 # Executa o supervisord para iniciar ambos os serviços
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
