@@ -108,7 +108,7 @@ async function loadMalwares() {
     malwares.forEach(malware => {
         const item = document.createElement('li');
         item.className = 'malware-item';
-        item.innerHTML = `
+        item.innerText = `
             <strong>${malware.m_name}</strong><br>
             ${malware.m_description}<br>
             <button onclick="deleteMalware(${malware.id})">Excluir</button>

@@ -4,6 +4,7 @@ const db = require('../database/db.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 // Rota para registrar um usuário
 router.post('/register', (req, res) => {
     const { email, password } = req.body;

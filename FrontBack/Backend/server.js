@@ -5,8 +5,12 @@ const malwareRoutes = require('./routes/malwareRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const path = require('path');
 const app = express();
+const helmet = require("helmet");
+const csurf = require("csurf");
 
 
+app.use(csurf());
+app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(cors())
