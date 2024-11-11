@@ -14,4 +14,4 @@ spec:
       protocol: TCP
       port: 3000        # Porta que será exposta externamente para o backend
       targetPort: 3000   # A porta no pod que será mapeada para a porta externa
-  type: LoadBalancer   # Tipo de serviço. Pode ser LoadBalancer, NodePort ou ClusterIP.
+  type: NodePort   # Tipo de serviço. Pode ser LoadBalancer, NodePort ou ClusterIP.
