@@ -21,17 +21,25 @@ RUN rm -rf ./*
 COPY ./Frontend/ /usr/share/nginx/html
 
 # Etapa 3: Combinar Backend e Frontend em um único container
-FROM node:22.11.0 AS Final
+FROM nginx:alpine AS Final
 
-# Instala o Nginx
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+# Instalar Node.js (para o backend) e dependências
+RUN apt-get update && apt-get install -y nodejs npm
 
 # Copiar os arquivos do Backend e Frontend
 COPY --from=Backend /app /app
 COPY --from=Frontend /usr/share/nginx/html /usr/share/nginx/html
 
-# Expor as portas
-EXPOSE 3000 3080
+# Expor as portas corretas
+EXPOSE 80 3000
+
+# Instalar dependências do backend
+WORKDIR /app
+RUN npm install
+
+# Copiar o script de inicialização
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Comando para iniciar o Nginx e o backend
-CMD ["sh", "-c", "nginx -g 'daemon off;' & cd /app && npm start"]
+CMD ["/start.sh"]
