@@ -20,14 +20,14 @@ app.use('/api/malware', malwareRoutes);
 app.use('/api/users', userRoutes);
 
 // Middleware 404 pagina de erro
-//app.use((req, res, next) => {
-//    res.status(404).sendFile(path.join(__dirname, '../frontend/pages/error.html'), (err) => {
-//        if (err) {
-//            console.error("Erro ao enviar a página de erro:", err);
-//            next(err);  
-//        }
-//    });
-//});
+app.use((req, res, next) => {
+   res.status(404).sendFile(path.join(__dirname, '../frontend/pages/error.html'), (err) => {
+       if (err) {
+           console.error("Erro ao enviar a página de erro:", err);
+           next(err);  
+       }
+   });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

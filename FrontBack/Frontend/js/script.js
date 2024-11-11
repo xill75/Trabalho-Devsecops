@@ -14,7 +14,7 @@ async function verificartoken() {
         return;
     }
 
-    const response = await fetch(`http://localhost:3000/api/users/verificartoken`, {
+    const response = await fetch(`http://localhost:30300/api/users/verificartoken`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function initCsvExport() {
     const exportCsvButton = document.getElementById('dowloadcsv');
     exportCsvButton.addEventListener('click', async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/malware/dowload`);
+            const response = await fetch(`http://localhost:30300/api/malware/dowload`);
             if (response.ok) {
                 const blob = await response.blob();
                 const link = document.createElement('a');
@@ -74,7 +74,7 @@ malwareForm.addEventListener('submit', async (e) => {
     const name = document.getElementById('name').value;
     const description = document.getElementById('description').value;
 
-    await fetch(`http://localhost:3000/api/malware`, {
+    await fetch(`http://localhost:30300/api/malware`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description })
@@ -85,7 +85,7 @@ malwareForm.addEventListener('submit', async (e) => {
 });
 
 async function loadMalwares() {
-    const response = await fetch(`http://localhost:3000/api/malware`);
+    const response = await fetch(`http://localhost:30300/api/malware`);
     let malwares = await response.json();
     malwareList.innerHTML = '';
 
@@ -119,7 +119,7 @@ async function loadMalwares() {
 async function deleteMalware(id) {
     const confirmDelete = confirm("Você tem certeza que quer excluir este malware?");
     if (confirmDelete) {
-        await fetch(`http://localhost:3000/api/malware/${id}`, { method: 'DELETE' });
+        await fetch(`http://localhost:30300/api/malware/${id}`, { method: 'DELETE' });
         loadMalwares();
     }
 }
@@ -136,7 +136,7 @@ function promptUpdateMalware(id, currentName, currentDescription) {
 }
 
 async function updateMalware(id, name, description) {
-    await fetch(`http://localhost:3000/api/malware/${id}`, {
+    await fetch(`http://localhost:30300/api/malware/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description })
