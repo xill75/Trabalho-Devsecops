@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: front-back
 spec:
-  serviceName: "front-back"  # Nome do serviço associando ao StatefulSet
+  serviceName: "front-back"  # Nome do serviço associado ao StatefulSet
   replicas: 2  # Número de pods desejados
   selector:
     matchLabels:
@@ -41,12 +41,12 @@ spec:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
                 key: DB_NAME
-      volumeClaimTemplates:  # Persistência de dados para o StatefulSet
-        - metadata:
-            name: front-back-pvc  # Nome do PVC (Persistent Volume Claim)
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 1Gi  # Tamanho do volume, ajustável conforme necessário
-  restartPolicy: Always
+  volumeClaimTemplates:  # Persistência de dados para o StatefulSet
+    - metadata:
+        name: front-back-pvc  # Nome do PVC
+      spec:
+        accessModes: ["ReadWriteOnce"]  # O volume será montado como leitura e escrita por um único pod
+        resources:
+          requests:
+            storage: 1Gi  # Tamanho do volume, ajuste conforme necessário
+        storageClassName: standard  # A classe de armazenamento pode ser ajustada conforme o seu ambiente
