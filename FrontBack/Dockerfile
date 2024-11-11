@@ -18,7 +18,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copiar os arquivos do frontend para o Nginx
-COPY ./Frontend/ /usr/share/nginx/html
+COPY ./Frontend/build /usr/share/nginx/html
 
 # Etapa 3: Combinar Backend e Frontend em um único container com supervisord
 FROM node:22.11.0 AS Final
