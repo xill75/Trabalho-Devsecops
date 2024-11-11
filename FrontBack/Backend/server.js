@@ -9,11 +9,11 @@ const helmet = require("helmet");
 const csurf = require("csurf");
 
 
-app.use(csurf());
+app.use(cors())
+app.use(csurf({ cookie: false }));
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
-app.use(cors())
 
 //Rotas
 app.use('/api/malware', malwareRoutes);
