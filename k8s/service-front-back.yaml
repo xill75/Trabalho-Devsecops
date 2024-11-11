@@ -4,14 +4,16 @@ metadata:
   name: front-back-service
 spec:
   selector:
-    app: front-back  # Certifique-se de que o 'app' no Deployment é 'front-back'
+    app: front-back  # Garante que o serviço está associado ao Deployment correto
   ports:
     - name: http
       protocol: TCP
-      port: 80          # Porta que será exposta externamente para o frontend
-      targetPort: 3080   # A porta do pod que será mapeada para a porta externa
+      port: 80          # Porta externa (para o frontend)
+      targetPort: 3080   # Porta interna no contêiner para o frontend
+      nodePort: 30080    # Porta externa no nó para o frontend
     - name: backend
       protocol: TCP
-      port: 3000        # Porta que será exposta externamente para o backend
-      targetPort: 3000   # A porta no pod que será mapeada para a porta externa
-  type: LoadBalancer  # Tipo de serviço, pode ser LoadBalancer, NodePort ou ClusterIP
+      port: 3000        # Porta externa (para o backend)
+      targetPort: 3000   # Porta interna no contêiner para o backend
+      nodePort: 30300    # Porta externa no nó para o backend
+  type: NodePort       # Tipo NodePort
