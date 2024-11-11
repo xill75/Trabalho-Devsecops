@@ -24,7 +24,7 @@ COPY ./Frontend/ /usr/share/nginx/html
 FROM node:22.11.0 AS Final
 
 # Instala o Nginx
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
 # Copiar os arquivos do Backend e Frontend
 COPY --from=Backend /app /app
