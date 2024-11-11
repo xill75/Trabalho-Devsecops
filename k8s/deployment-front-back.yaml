@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: front-back
+        
         image: felpsxill/malware-app:frontend-backend-latest  # Nome correto da imagem
         imagePullPolicy: Always
         ports:
