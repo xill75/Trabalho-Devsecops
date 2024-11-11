@@ -4,7 +4,7 @@ FROM node:22.11.0 AS Backend
 WORKDIR /app
 
 # Copiar os arquivos do backend
-COPY ./backend/ /app
+COPY ./Backend/ /app
 
 # Instalar dependências do backend
 RUN npm install
@@ -17,8 +17,8 @@ WORKDIR /usr/share/nginx/html
 # Remover arquivos existentes do Nginx
 RUN rm -rf ./*
 
-# Copiar os arquivos de build do frontend para o Nginx
-COPY ./frontend/build /usr/share/nginx/html
+# Copiar os arquivos do frontend para o Nginx
+COPY ./Frontend/ /usr/share/nginx/html
 
 # Etapa 3: Combinar Backend e Frontend em um único container com supervisord
 FROM node:22.11.0 AS Final
