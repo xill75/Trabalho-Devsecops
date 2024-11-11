@@ -10,10 +10,10 @@ const csurf = require("csurf");
 
 
 app.use(cors())
-app.use(csurf({ cookie: false }));
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
+app.use(csurf({ cookie: false }));
 
 //Rotas
 app.use('/api/malware', malwareRoutes);
