@@ -24,19 +24,19 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
-                key: DB_HOST
+                key: MYSQL_HOST     # Referência correta para a variável MYSQL_HOST no Secret
           - name: DB_USER
             valueFrom:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
-                key: DB_USER
+                key: MYSQL_USER     # Referência correta para a variável MYSQL_USER no Secret
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
-                key: DB_PASSWORD
+                key: MYSQL_PASSWORD # Referência correta para a variável MYSQL_PASSWORD no Secret
           - name: DB_NAME
             valueFrom:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
-                key: DB_NAME
+                key: MYSQL_DATABASE # Referência correta para a variável MYSQL_DATABASE no Secret
