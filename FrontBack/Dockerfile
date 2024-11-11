@@ -4,7 +4,7 @@ FROM node:22.11.0 AS Backend
 WORKDIR /app
 
 # Copiar os arquivos do backend
-COPY ./Backend/ /app
+COPY ./backend/ /app
 
 # Instalar dependências do backend
 RUN npm install
@@ -18,23 +18,23 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copiar os arquivos do frontend para o Nginx
-COPY ./Frontend/build /usr/share/nginx/html
+COPY ./frontend/build /usr/share/nginx/html
 
-# Etapa 3: Combinar Backend e Frontend em um único container com supervisord
+# Etapa 3: Combinar Backend e Frontend em um único container
 FROM node:22.11.0 AS Final
 
-# Instala o supervisor e o Nginx
-RUN apt-get update && apt-get install -y supervisor nginx && rm -rf /var/lib/apt/lists/*
+# Instala o Nginx
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
 # Copiar os arquivos do Backend e Frontend
 COPY --from=Backend /app /app
 COPY --from=Frontend /usr/share/nginx/html /usr/share/nginx/html
 
-# Copiar o arquivo de configuração do supervisord
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Copiar o arquivo de configuração do Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expor as portas
 EXPOSE 3000 80
 
-# Executa o supervisord para iniciar ambos os serviços
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Comando para iniciar o Nginx e o backend
+CMD ["sh", "-c", "nginx -g 'daemon off;' & node /app/index.js"]

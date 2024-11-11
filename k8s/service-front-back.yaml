@@ -8,8 +8,8 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 80          # Porta que será exposta externamente
-      targetPort: 80     # A porta no pod que será mapeada para a porta externa
+      port: 3080          # Porta que será exposta externamente
+      targetPort: 3080     # A porta no pod que será mapeada para a porta externa
     - name: backend
       protocol: TCP
       port: 3000        # Porta que será exposta externamente para o backend
