@@ -40,3 +40,8 @@ spec:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
                 key: MYSQL_DATABASE # Referência correta para a variável MYSQL_DATABASE no Secret
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret  # Nome do Secret onde o JWT_SECRET está armazenado
+                key: JWT_SECRET   # A chave do valor dentro do Secret

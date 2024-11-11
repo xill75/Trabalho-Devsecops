@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require('../database/db.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 // Rota para registrar um usuário
@@ -32,7 +34,7 @@ router.post('/register', (req, res) => {
 // Rota para login
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-    const JWT_SECRET = 'xillcapeta';
+    const JWT_SECRET = process.env.JWT_SECRET;
 
     db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
         if (err) return res.status(500).send({ message: 'Erro no servidor' });
@@ -58,7 +60,7 @@ router.post('/login', (req, res) => {
 // rota pra verificar token
 router.post('/verificartoken', (req, res) => {
 
-    const JWT_SECRET = 'xillcapeta';
+    const JWT_SECRET = process.env.JWT_SECRET;
     const token = req.body.token; // Recebe o token no corpo da requisição
 
     if (!token) {
@@ -66,7 +68,7 @@ router.post('/verificartoken', (req, res) => {
     }
 
     // Verifica a validade do token
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(401).send({ message: 'Token inválido ou expirado' });
         }
