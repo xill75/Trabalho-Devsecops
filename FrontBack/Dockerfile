@@ -23,8 +23,6 @@ COPY ./Frontend/ /usr/share/nginx/html
 # Etapa 3: Combinar Backend e Frontend em um único container
 FROM nginx:alpine AS Final
 
-
-
 # Instalar Node.js e npm usando o apk
 RUN apk update && apk add --no-cache nodejs npm
 
