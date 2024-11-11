@@ -7,12 +7,10 @@ spec:
     app: front-back  # Garante que o serviço está associado ao Deployment correto
   ports:
     - name: http
-      protocol: TCP
       port: 80          # Porta externa (para o frontend)
       targetPort: 3080   # Porta interna no contêiner para o frontend
       nodePort: 30080    # Porta externa no nó para o frontend
     - name: backend
-      protocol: TCP
       port: 3000        # Porta externa (para o backend)
       targetPort: 3000   # Porta interna no contêiner para o backend
       nodePort: 30300    # Porta externa no nó para o backend
