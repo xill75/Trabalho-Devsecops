@@ -31,7 +31,7 @@ COPY --from=Backend /app /app
 COPY --from=Frontend /usr/share/nginx/html /usr/share/nginx/html
 
 # Expor as portas
-EXPOSE 3000 80
+EXPOSE 3000 3080
 
 # Comando para iniciar o Nginx e o backend
 CMD ["sh", "-c", "nginx -g 'daemon off;' & cd /app && npm start"]
