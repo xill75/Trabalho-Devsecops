@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('senha').value;
 
             try {
-                const response = await fetch(`http://localhost:30300/api/users/login`, {
+                const response = await fetch(`http://192.168.98.128:30300/api/users/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:30300/api/users/register`, {
+                const response = await fetch(`http://192.168.98.128:30300/api/users/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
