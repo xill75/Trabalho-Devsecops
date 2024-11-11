@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: front-back
 spec:
+  serviceName: "front-back"  # Nome do serviço associando ao StatefulSet
   replicas: 2  # Número de pods desejados
   selector:
     matchLabels:
@@ -18,7 +19,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000  # Backend na porta 3000
-        - containerPort: 3080    # Frontend na porta 80
+        - containerPort: 3080  # Frontend na porta 80
         env:
           - name: DB_HOST
             valueFrom:
@@ -40,4 +41,12 @@ spec:
               secretKeyRef:
                 name: mysql-secrets  # Usando o segredo correto
                 key: DB_NAME
-      restartPolicy: Always
+      volumeClaimTemplates:  # Persistência de dados para o StatefulSet
+        - metadata:
+            name: front-back-pvc  # Nome do PVC (Persistent Volume Claim)
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 1Gi  # Tamanho do volume, ajustável conforme necessário
+  restartPolicy: Always
