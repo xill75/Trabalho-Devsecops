@@ -3,8 +3,9 @@ const router = express.Router();
 const db = require('../database/db.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 const JWT_SECRET = process.env.JWT_SECRET;
+require('dotenv').config();
+
 
 
 // Rota para registrar um usuário
