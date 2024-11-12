@@ -98,8 +98,10 @@ async function loadMalwares() {
     const sortBy = document.getElementById('sortMalwares').value;
     if (sortBy === 'name') {
         malwares.sort((a, b) => a.m_name.localeCompare(b.m_name));
+        loadMalwares();
     } else if (sortBy === 'date') {
         malwares.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        loadMalwares();
     }
 
     malwareCount.textContent = malwares.length;
