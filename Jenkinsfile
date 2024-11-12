@@ -34,7 +34,6 @@ pipeline {
                 withCredentials([string(credentialsId: 'SNYK-TOKEN', variable: 'SNYK_TOKEN')]) {
                     dir('FrontBack/Backend') {
                         sh 'snyk auth --auth-type=token $SNYK_TOKEN'
-                        sh 'snyk ignore --file-path=FrontBack/Backend/server.js --reason="No fix available" --expires="2028-01-01T00:00:00.000Z"'
                         sh 'snyk code test -d'
                     }
                 }
