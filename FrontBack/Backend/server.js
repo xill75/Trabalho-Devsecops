@@ -13,7 +13,7 @@ app.use(cors())
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
-app.use(csurf());
+app.use(csurf({cookie:true}));
 
 app.use(function(req, res, next) {
     res.cookie("mytoken", req.csrfToken());
