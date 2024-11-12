@@ -1,13 +1,13 @@
 version: v1.5.0
 ignore:
   'SNYK-JS-COOKIE-8163060':
-    - '*':
-        reason: 'No fix available'
-        expires: '2028-01-01T00:00:00.000Z'
+    - path: '*'
+      reason: 'No fix available'
+      expires: '2028-01-01T00:00:00.000Z'
   'SNYK-JS-INFLIGHT-6095116':
-    - '*':
-        reason: 'No fix available'
-        expires: '2028-01-01T00:00:00.000Z'
+    - path: '*'
+      reason: 'No fix available'
+      expires: '2028-01-01T00:00:00.000Z'
 exclude:
   global:
     - server.js
