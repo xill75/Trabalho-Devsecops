@@ -44,3 +44,46 @@ body.dark-mode h2 {
 body.dark-mode .malware-item {
   border-color: #555;
 }
+
+.malware-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.malware-item strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.malware-item-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.malware-item button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.malware-item button:hover {
+  opacity: 0.9;
+}
+
+.malware-item .delete-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.malware-item .edit-btn {
+  background-color: #3498db;
+  color: #fff;
+}
+
