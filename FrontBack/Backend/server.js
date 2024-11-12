@@ -7,15 +7,18 @@ const path = require('path');
 const app = express();
 const helmet = require("helmet");
 const csurf = require("csurf");
+const cookieParser = require('cookie-parser');
 
-
-app.use(cors())
+app.use(cookieParser());
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
-app.use(csurf({cookie:true}));
 
-app.use(function(req, res, next) {
+
+app.use(csurf({ cookie: true }));
+
+app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
 });
