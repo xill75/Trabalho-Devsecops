@@ -8,6 +8,4 @@ ignore:
     - '*':
         reason: 'No fix available'
         expires: '2028-01-01T00:00:00.000Z'
-exclude:
-  global:
-    - server.js
+
