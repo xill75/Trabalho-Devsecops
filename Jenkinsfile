@@ -22,7 +22,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'SNYK-TOKEN', variable: 'SNYK_TOKEN')]) {
                     sh 'snyk auth --auth-type=token $SNYK_TOKEN'
                     dir('FrontBack/Backend') {
+                        sh 'snyk ignore –id=SNYK-JS-COOKIE-8163060 [--expiry=2025-01-01] [--reason=no fix available]'
+                        sh 'snyk ignore -id=SNYK-JS-INFLIGHT-6095116 [--expiry=2025-01-01] [--reason=no fix available]'
                         sh 'snyk test'
+
                     }
                 }
             }
@@ -33,6 +36,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'SNYK-TOKEN', variable: 'SNYK_TOKEN')]) {
                     dir('FrontBack/Backend') {
                         sh 'snyk auth --auth-type=token $SNYK_TOKEN'
+                        sh 'snyk ignore –id=SNYK-JS-COOKIE-8163060 [--expiry=2025-01-01] [--reason=no fix available]'
+                        sh 'snyk ignore -id=SNYK-JS-INFLIGHT-6095116 [--expiry=2025-01-01] [--reason=no fix available]'
                         sh 'snyk code test -d'
                     }
                 }
