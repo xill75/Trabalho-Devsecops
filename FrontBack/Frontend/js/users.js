@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('senha').value;
             const confirmPassword = document.getElementById('oksenha').value;
 
-            // Verificação da política de senha (mínimo de 8 caracteres e pelo menos um número)
+            // Verificação da política de senha (mínimo de 8 caracteres , pelo menos um número e caracter especial)
             const senhaForteRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,255}$/;
             if (!senhaForteRegex.test(password)) {
-                alert('A senha deve ter pelo menos 8 caracteres e incluir pelo menos um número.');
+                alert('A senha deve ter pelo menos 8 caracteres , incluir pelo menos um número e um caractere especial.');
                 return;
             }
 
