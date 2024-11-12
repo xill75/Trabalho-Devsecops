@@ -7,12 +7,29 @@ pipeline {
         MYSQL_DIR = 'Mysql'
         K8S_DIR = 'k8s'
     }
-
+    
     stages {
         stage('Initialize Pipeline') {
             steps {
                 script {
                     checkout scm
+                }
+            }
+        }
+        stage('SCA') {
+            steps {
+                sh 'snyk auth --auth-type=token $SNYK_TOKEN'
+                dir('FrontBack/Backend') {
+                    sh 'snyk test'
+                }
+            }
+        }
+
+        stage('SAST') {
+            steps {
+                dir('FrontBack/Backend') {
+                    sh 'snyk auth --auth-type=token $SNYK_TOKEN'
+                    sh 'snyk code test -d'
                 }
             }
         }
@@ -28,6 +45,8 @@ pipeline {
                 }
             }
         }
+
+
 
         stage('Build and Push Frontend and Backend') {
             steps {
