@@ -4,3 +4,7 @@ ignore:
     - '*':
         reason: 'No fix avaliable'
         expires: '2028-01-01T00:00:00.000Z'
+    'SNYK-JS-COOKIE-8163060':
+    - '*':
+        reason: 'No fix available'
+        expires: '2028-01-01T00:00:00.000Z'
