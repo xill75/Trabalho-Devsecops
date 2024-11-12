@@ -90,6 +90,9 @@ malwareForm.addEventListener('submit', async (e) => {
 sortMalware.addEventListener('click', async (e) => {
     e.preventDefault();
 
+    const response = await fetch(`http://192.168.98.128:30300/api/malware`);
+    let malwares = await response.json();
+
     const sortBy = document.getElementById('sortMalwares').value;
     if (sortBy === 'name') {
         malwares.sort((a, b) => a.m_name.localeCompare(b.m_name));
@@ -103,7 +106,7 @@ sortMalware.addEventListener('click', async (e) => {
 async function loadMalwares() {
     const response = await fetch(`http://192.168.98.128:30300/api/malware`);
     let malwares = await response.json();
-    malwareList.innerHTML = ''; // Limpar a lista de malwares antes de preencher
+    malwareList.innerHTML = '';
 
     const pesquisa = searchMalware.value.toLowerCase();
     malwares = malwares.filter(malware => 
