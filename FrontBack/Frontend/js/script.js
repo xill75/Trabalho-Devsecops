@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar token e carregar a lista de malwares ao carregar a página
     verificartoken();
+    loadMalwares();
     initDarkModeToggle();
     initCsvExport();
 });
@@ -86,7 +88,7 @@ malwareForm.addEventListener('submit', async (e) => {
 async function loadMalwares() {
     const response = await fetch(`http://192.168.98.128:30300/api/malware`);
     let malwares = await response.json();
-    malwareList.innerHTML = '';
+    malwareList.innerHTML = ''; // Limpar a lista de malwares antes de preencher
 
     const pesquisa = searchMalware.value.toLowerCase();
     malwares = malwares.filter(malware => 
@@ -109,14 +111,14 @@ async function loadMalwares() {
         // Criando elementos de forma segura, sem usar innerHTML
         const div1 = document.createElement('div');
         const strong = document.createElement('strong');
-        strong.textContent = malware.m_name; // Usando textContent em vez de innerHTML
+        strong.textContent = malware.m_name; // Usando textContent para evitar XSS
         div1.appendChild(strong);
         
         const br = document.createElement('br');
         div1.appendChild(br);
 
         const description = document.createElement('div');
-        description.textContent = malware.m_description; // Usando textContent para garantir que a descrição é segura
+        description.textContent = malware.m_description; // Usando textContent para evitar XSS
         
         div1.appendChild(description);
         item.appendChild(div1);
@@ -127,12 +129,20 @@ async function loadMalwares() {
         const editButton = document.createElement('button');
         editButton.className = 'edit-btn';
         editButton.textContent = 'Editar';
-        editButton.onclick = () => promptUpdateMalware(malware.id, malware.m_name, malware.m_description);
-        
+        editButton.setAttribute('data-id', malware.id); // Atribuindo ID para o botão
+        editButton.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            promptUpdateMalware(id, malware.m_name, malware.m_description);
+        });
+
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete-btn';
         deleteButton.textContent = 'Excluir';
-        deleteButton.onclick = () => deleteMalware(malware.id);
+        deleteButton.setAttribute('data-id', malware.id); // Atribuindo ID para o botão
+        deleteButton.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            confirmDeleteMalware(id);
+        });
         
         buttonsDiv.appendChild(editButton);
         buttonsDiv.appendChild(deleteButton);
@@ -142,12 +152,16 @@ async function loadMalwares() {
     });
 }
 
-async function deleteMalware(id) {
-    const confirmDelete = confirm("Você tem certeza que quer excluir este malware?");
-    if (confirmDelete) {
-        await fetch(`http://192.168.98.128:30300/api/malware/${id}`, { method: 'DELETE' });
-        loadMalwares();
+async function confirmDeleteMalware(id) {
+    const userConfirmed = confirm("Você tem certeza que quer excluir este malware?");
+    if (userConfirmed) {
+        await deleteMalware(id);
     }
+}
+
+async function deleteMalware(id) {
+    await fetch(`http://192.168.98.128:30300/api/malware/${id}`, { method: 'DELETE' });
+    loadMalwares(); // Recarregar a lista de malwares após exclusão
 }
 
 function promptUpdateMalware(id, currentName, currentDescription) {
@@ -167,7 +181,7 @@ async function updateMalware(id, name, description) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description })
     });
-    loadMalwares();
+    loadMalwares(); // Recarregar a lista de malwares após atualização
 }
 
 function login() {
