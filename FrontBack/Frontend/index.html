@@ -26,6 +26,24 @@
         </form>
         <button id="dowloadcsv">Dowload CSV</button>
 
+        <h2>Editar Malware</h2>
+        <form id="editMalwareForm">
+            <input type="text" id="editName" placeholder="Nome do Malware" required>
+            <textarea id="editDescription" placeholder="Descrição do Malware"></textarea>
+            <button type="submit">Atualizar Malware</button>
+        </form>
+        <button id="editButton">Editar Malware</button>
+
+        <h2>Deletar Malware</h2>
+        <form id="deleteMalwareForm">
+            <input type="text" id="deleteName" placeholder="Nome do Malware" required>
+            <textarea id="deleteDescription" placeholder="Descrição do Malware"></textarea>
+            <button type="submit">Deletar Malware</button>
+        </form>
+        <button id="deleteButton">Deletar Malware</button>
+
+
+
         <h2>Lista de Malwares (<span id="malwareCount">0</span>)</h2>
         <label for="searchMalware">Pesquisar Malware:</label>
         <input type="text" id="searchMalware" placeholder="Digite o nome do malware">
@@ -35,6 +53,7 @@
             <option value="date">Data de Cadastro (Mais Recentes)</option>
         </select>
 
+        
         <ul id="malwareList"></ul>
 
     </main>

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     verificartoken();
     initDarkModeToggle();
@@ -106,18 +105,39 @@ async function loadMalwares() {
     malwares.forEach(malware => {
         const item = document.createElement('li');
         item.className = 'malware-item';
-        
-        item.innerText = `
-            <div>
-                <strong>${malware.m_name}</strong><br>
-                ${malware.m_description}
-            </div>
-            <div class="malware-item-buttons">
-                <button class="edit-btn" onclick="promptUpdateMalware(${malware.id}, '${malware.m_name}', '${malware.m_description}')">Editar</button>
-                <button class="delete-btn" onclick="deleteMalware(${malware.id})">Excluir</button>
-            </div>
-        `;
 
+        // Criando elementos de forma segura, sem usar innerHTML
+        const div1 = document.createElement('div');
+        const strong = document.createElement('strong');
+        strong.textContent = malware.m_name; // Usando textContent em vez de innerHTML
+        div1.appendChild(strong);
+        
+        const br = document.createElement('br');
+        div1.appendChild(br);
+
+        const description = document.createElement('div');
+        description.textContent = malware.m_description; // Usando textContent para garantir que a descrição é segura
+        
+        div1.appendChild(description);
+        item.appendChild(div1);
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'malware-item-buttons';
+        
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-btn';
+        editButton.textContent = 'Editar';
+        editButton.onclick = () => promptUpdateMalware(malware.id, malware.m_name, malware.m_description);
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-btn';
+        deleteButton.textContent = 'Excluir';
+        deleteButton.onclick = () => deleteMalware(malware.id);
+        
+        buttonsDiv.appendChild(editButton);
+        buttonsDiv.appendChild(deleteButton);
+        
+        item.appendChild(buttonsDiv);
         malwareList.appendChild(item);
     });
 }
