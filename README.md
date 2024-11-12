@@ -1,4 +1,5 @@
 🛡️ Trabalho DevSecOps - Plataforma de Pesquisa e Registro de Malwares
+
 📋 Descrição do Projeto
 
 A proposta deste trabalho é desenvolver uma plataforma colaborativa para registro e pesquisa de malwares, facilitando o compartilhamento de informações de inteligência contra ameaças cibernéticas. Essa solução visa capacitar agentes de segurança ao fornecer uma base de dados com Indicadores de Comprometimento (IOCs), ajudando a antecipar e combater ameaças de forma eficaz.
