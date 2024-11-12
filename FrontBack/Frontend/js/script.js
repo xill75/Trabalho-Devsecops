@@ -106,16 +106,31 @@ async function loadMalwares() {
     malwares.forEach(malware => {
         const item = document.createElement('li');
         item.className = 'malware-item';
-        item.innerText = `
-            <strong>${malware.m_name}</strong><br>
-            ${malware.m_description}<br>
-            <button onclick="deleteMalware(${malware.id})">Excluir</button>
-            <button onclick="promptUpdateMalware(${malware.id}, '${malware.m_name}', '${malware.m_description}')">Atualizar</button>
-        `;
+    
+        const nameElement = document.createElement('strong');
+        nameElement.textContent = malware.m_name;
+    
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = malware.m_description;
+    
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Excluir';
+        deleteButton.onclick = () => deleteMalware(malware.id);
+    
+        const updateButton = document.createElement('button');
+        updateButton.textContent = 'Atualizar';
+        updateButton.onclick = () => promptUpdateMalware(malware.id, malware.m_name, malware.m_description);
+    
+        item.appendChild(nameElement);
+        item.appendChild(document.createElement('br'));
+        item.appendChild(descriptionElement);
+        item.appendChild(document.createElement('br'));
+        item.appendChild(deleteButton);
+        item.appendChild(updateButton);
+    
         malwareList.appendChild(item);
     });
-}
-
+    
 async function deleteMalware(id) {
     const confirmDelete = confirm("Você tem certeza que quer excluir este malware?");
     if (confirmDelete) {
