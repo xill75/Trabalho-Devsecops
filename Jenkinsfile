@@ -6,6 +6,7 @@ pipeline {
         FRONTBACK_DIR = 'FrontBack'
         MYSQL_DIR = 'Mysql'
         K8S_DIR = 'k8s'
+        SNYK_TOKEN='SYNK_TOKEN'
     }
     
     stages {
