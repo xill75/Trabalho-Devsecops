@@ -29,7 +29,7 @@ async function verificartoken() {
         // Redireciona para a página de login se o token for inválido
         window.location.href = 'pages/login.html';
     } else {
-        console.log(data.message); // Exemplo de uso da resposta
+        console.log(data.message);
     }
 }
 
@@ -85,6 +85,21 @@ malwareForm.addEventListener('submit', async (e) => {
     loadMalwares();
 });
 
+
+
+sortMalware.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const sortBy = document.getElementById('sortMalwares').value;
+    if (sortBy === 'name') {
+        malwares.sort((a, b) => a.m_name.localeCompare(b.m_name));
+        loadMalwares();
+    } else if (sortBy === 'date') {
+        malwares.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        loadMalwares();
+    }
+})
+
 async function loadMalwares() {
     const response = await fetch(`http://192.168.98.128:30300/api/malware`);
     let malwares = await response.json();
@@ -95,32 +110,22 @@ async function loadMalwares() {
         malware.m_name.toLowerCase().includes(pesquisa)
     );
 
-    const sortBy = document.getElementById('sortMalwares').value;
-    if (sortBy === 'name') {
-        malwares.sort((a, b) => a.m_name.localeCompare(b.m_name));
-        loadMalwares();
-    } else if (sortBy === 'date') {
-        malwares.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        loadMalwares();
-    }
-
     malwareCount.textContent = malwares.length;
 
     malwares.forEach(malware => {
         const item = document.createElement('li');
         item.className = 'malware-item';
 
-        // Criando elementos de forma segura, sem usar innerHTML
         const div1 = document.createElement('div');
         const strong = document.createElement('strong');
-        strong.textContent = malware.m_name; // Usando textContent para evitar XSS
+        strong.textContent = malware.m_name;
         div1.appendChild(strong);
         
         const br = document.createElement('br');
         div1.appendChild(br);
 
         const description = document.createElement('div');
-        description.textContent = malware.m_description; // Usando textContent para evitar XSS
+        description.textContent = malware.m_description;
         
         div1.appendChild(description);
         item.appendChild(div1);
@@ -131,7 +136,7 @@ async function loadMalwares() {
         const editButton = document.createElement('button');
         editButton.className = 'edit-btn';
         editButton.textContent = 'Editar';
-        editButton.setAttribute('data-id', malware.id); // Atribuindo ID para o botão
+        editButton.setAttribute('data-id', malware.id);
         editButton.addEventListener('click', (e) => {
             const id = e.target.getAttribute('data-id');
             promptUpdateMalware(id, malware.m_name, malware.m_description);
@@ -140,7 +145,7 @@ async function loadMalwares() {
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete-btn';
         deleteButton.textContent = 'Excluir';
-        deleteButton.setAttribute('data-id', malware.id); // Atribuindo ID para o botão
+        deleteButton.setAttribute('data-id', malware.id); 
         deleteButton.addEventListener('click', (e) => {
             const id = e.target.getAttribute('data-id');
             confirmDeleteMalware(id);
