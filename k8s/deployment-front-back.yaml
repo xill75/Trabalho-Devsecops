@@ -15,7 +15,7 @@ spec:
       containers:
       - name: front-back
         
-        image: felpsxill/malware-app:frontend-backend-latest  # Nome correto da imagem
+        image: felpsxill/malware-app:frontend-backend-latest  
         imagePullPolicy: Always
         ports:
         - containerPort: 3000  # Porta para o backend
@@ -24,25 +24,25 @@ spec:
           - name: DB_HOST
             valueFrom:
               secretKeyRef:
-                name: mysql-secrets  # Usando o segredo correto
+                name: mysql-secrets  
                 key: MYSQL_HOST     # Referência correta para a variável MYSQL_HOST no Secret
           - name: DB_USER
             valueFrom:
               secretKeyRef:
-                name: mysql-secrets  # Usando o segredo correto
+                name: mysql-secrets  
                 key: MYSQL_USER     # Referência correta para a variável MYSQL_USER no Secret
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mysql-secrets  # Usando o segredo correto
+                name: mysql-secrets 
                 key: MYSQL_PASSWORD # Referência correta para a variável MYSQL_PASSWORD no Secret
           - name: DB_NAME
             valueFrom:
               secretKeyRef:
-                name: mysql-secrets  # Usando o segredo correto
+                name: mysql-secrets  
                 key: MYSQL_DATABASE # Referência correta para a variável MYSQL_DATABASE no Secret
           - name: JWT_SECRET
             valueFrom:
               secretKeyRef:
-                name: jwt-secret  # Nome do Secret onde o JWT_SECRET está armazenado
-                key: JWT_SECRET   # A chave do valor dentro do Secret
+                name: jwt-secret 
+                key: JWT_SECRET   
