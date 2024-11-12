@@ -106,12 +106,18 @@ async function loadMalwares() {
     malwares.forEach(malware => {
         const item = document.createElement('li');
         item.className = 'malware-item';
+        
         item.innerText = `
-            <strong>${malware.m_name}</strong><br>
-            ${malware.m_description}<br>
-            <button onclick="deleteMalware(${malware.id})">Excluir</button>
-            <button onclick="promptUpdateMalware(${malware.id}, '${malware.m_name}', '${malware.m_description}')">Atualizar</button>
+            <div>
+                <strong>${malware.m_name}</strong><br>
+                ${malware.m_description}
+            </div>
+            <div class="malware-item-buttons">
+                <button class="edit-btn" onclick="promptUpdateMalware(${malware.id}, '${malware.m_name}', '${malware.m_description}')">Editar</button>
+                <button class="delete-btn" onclick="deleteMalware(${malware.id})">Excluir</button>
+            </div>
         `;
+
         malwareList.appendChild(item);
     });
 }
