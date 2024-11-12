@@ -19,18 +19,22 @@ pipeline {
         }
         stage('SCA') {
             steps {
-                sh 'snyk auth --auth-type=token $SNYK_TOKEN'
-                dir('FrontBack/Backend') {
-                    sh 'snyk test'
+                withCredentials([string(credentialsId: 'SNYK-TOKEN', variable: 'SNYK_TOKEN')]) {
+                    sh 'snyk auth --auth-type=token $SNYK_TOKEN'
+                    dir('FrontBack/Backend') {
+                        sh 'snyk test'
+                    }
                 }
             }
         }
 
         stage('SAST') {
             steps {
-                dir('FrontBack/Backend') {
-                    sh 'snyk auth --auth-type=token $SNYK_TOKEN'
-                    sh 'snyk code test -d'
+                withCredentials([string(credentialsId: 'SNYK-TOKEN', variable: 'SNYK_TOKEN')]) {
+                    dir('FrontBack/Backend') {
+                        sh 'snyk auth --auth-type=token $SNYK_TOKEN'
+                        sh 'snyk code test -d'
+                    }
                 }
             }
         }
